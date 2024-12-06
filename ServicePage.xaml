@@ -1,0 +1,96 @@
+﻿<Page x:Class="Borisin_glazki_save.ServicePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Borisin_glazki_save"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ServicePage" Background="#FFFFFF">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" >
+            <TextBox TextChanged="Search_TextChanged"  Name="Search" Width="200"  FontSize="20"></TextBox>
+            <ComboBox Name="sort" SelectionChanged="sort_SelectionChanged" Width="200" FontSize="15">
+                <TextBlock>Сортировка</TextBlock>
+                <TextBlock>Наименование по возрастанию</TextBlock>
+                <TextBlock>Наименование по убыванию</TextBlock>
+                <TextBlock>Скидка по возрастанию</TextBlock>
+                <TextBlock>Скидка по убыванию</TextBlock>
+                <TextBlock>Приоритет по возрастанию</TextBlock>
+                <TextBlock>Скидка по убыванию</TextBlock>
+
+            </ComboBox>
+            <ComboBox Name="filtr" SelectionChanged="filtr_SelectionChanged" Width="200" FontSize="15">
+                <TextBlock > все</TextBlock>
+                <TextBlock > МФО</TextBlock>
+                <TextBlock > ООО</TextBlock>
+                <TextBlock > ЗАО</TextBlock>
+                <TextBlock > МКК</TextBlock>
+                <TextBlock > ОАО</TextBlock>
+                <TextBlock > ПАО</TextBlock>
+
+            </ComboBox>
+        </WrapPanel>
+
+        <ListView Name="AgentListView" Grid.Row="2" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Width=" 200" Grid.Column=" 0" Grid.RowSpan="4" Stretch="UniformToFill" HorizontalAlignment="Center" >
+                            <Image.Source >
+                                <Binding Path="MainImagePath">
+                                    <Binding.TargetNullValue >
+                                        <ImageSource>
+                                            /agents/Глазки-save.png
+                                        </ImageSource>
+                                    </Binding.TargetNullValue>
+                                </Binding>
+                            </Image.Source>
+                        </Image>
+                        <WrapPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding AgentTypeTitle}"  FontSize="20" TextWrapping="Wrap"></TextBlock>
+                            <TextBlock Text=" | "  FontSize="20" ></TextBlock>
+                            <TextBlock Text="{Binding Title}" FontSize="20" ></TextBlock>
+                        </WrapPanel>
+                        <TextBlock Text="{Binding Phone}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap"></TextBlock>
+                        <WrapPanel Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
+                            <TextBlock Text="Приоритетность: "  FontSize="20" ></TextBlock>
+                            <TextBlock  Text="{Binding Priority}"  FontSize="20"></TextBlock>
+                        </WrapPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Row="3" Orientation ="Horizontal" HorizontalAlignment="Right" >
+            <TextBlock Name="Count" FontSize="20" Height="25"></TextBlock>
+            <TextBlock Name="Allrecords" FontSize="20" Height="25"></TextBlock>
+            <Button Name="left" Content="&lt;" Width="25" Height="25" Click="left_Click"></Button>
+            <ListBox FontSize="20" Name="PageListBox" MouseUp="PageListBox_MouseUp" Height="30">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Height="25"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <Button Name="Right" Content="&gt;" Width="25" Height="25" Click="Right_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Page>
