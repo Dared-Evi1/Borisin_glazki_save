@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Borisin_glazki_save"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ServicePage" Background="#FFFFFF">
+      Title="ServicePage" Background="#FFFFFF" IsVisibleChanged="Page_IsVisibleChanged">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -37,6 +37,7 @@
                 <TextBlock > ПАО</TextBlock>
 
             </ComboBox>
+            <Button Name="Add" Click="Add_Click" Content="Добавить"></Button>
         </WrapPanel>
 
         <ListView Name="AgentListView" Grid.Row="2" >
@@ -54,12 +55,12 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Image Width=" 200" Grid.Column=" 0" Grid.RowSpan="4" Stretch="UniformToFill" HorizontalAlignment="Center" >
+                        <Image Width=" 100"  Grid.Column=" 0" Grid.RowSpan="4" Stretch="UniformToFill" HorizontalAlignment="Center" >
                             <Image.Source >
-                                <Binding Path="MainImagePath">
+                                <Binding Path="Logo">
                                     <Binding.TargetNullValue >
                                         <ImageSource>
-                                            /agents/Глазки-save.png
+                                            agents/picture.png
                                         </ImageSource>
                                     </Binding.TargetNullValue>
                                 </Binding>
@@ -70,10 +71,14 @@
                             <TextBlock Text=" | "  FontSize="20" ></TextBlock>
                             <TextBlock Text="{Binding Title}" FontSize="20" ></TextBlock>
                         </WrapPanel>
-                        <TextBlock Text="{Binding Phone}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="20" TextWrapping="Wrap"></TextBlock>
-                        <WrapPanel Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left">
-                            <TextBlock Text="Приоритетность: "  FontSize="20" ></TextBlock>
-                            <TextBlock  Text="{Binding Priority}"  FontSize="20"></TextBlock>
+                        
+                        <TextBlock Text="продажи за год:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="16" TextWrapping="Wrap"></TextBlock>
+
+                        <TextBlock Text="{Binding Phone}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" FontSize="16" TextWrapping="Wrap"></TextBlock>
+                        <WrapPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" >
+                            <TextBlock Text="Приоритетность: "  FontSize="16" ></TextBlock>
+                            <TextBlock  Text="{Binding Priority}"  FontSize="16" ></TextBlock>
+                            <Button Content="Редактировать" Name="Edit" Click="Edit_Click"></Button>
                         </WrapPanel>
                     </Grid>
                 </DataTemplate>

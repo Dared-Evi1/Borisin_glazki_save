@@ -39,7 +39,7 @@ namespace Borisin_glazki_save
         {
             var currentAgents = Борисин_глазки_saveEntities.GetContext().Agent.ToList();
 
-
+            
             if (filtr.SelectedIndex == 1)
                 currentAgents = currentAgents.Where(p => p.AgentTypeID == 1).ToList();
             if (filtr.SelectedIndex == 2)
@@ -55,10 +55,10 @@ namespace Borisin_glazki_save
 
             currentAgents = currentAgents.Where(p => p.Title.ToLower().Contains(Search.Text.ToLower())
                           || p.Email.ToLower().Contains(Search.Text.ToLower())
-                          || p.Phone.ToLower().Contains(Search.Text.ToLower())).ToList();
+                          || p.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Contains(Search.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", ""))).ToList();
 
             AgentListView.ItemsSource = currentAgents.ToList();
-
+            
             if (sort.SelectedIndex == 1)
                 AgentListView.ItemsSource = currentAgents.OrderBy(p => p.Title).ToList();
             if (sort.SelectedIndex == 2)
@@ -184,6 +184,24 @@ for(int i= currentPage * 10;i < min; i++)
         {
             Change(2, null);
 
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            manager.MainFrame.Navigate(new AddEditPage(null));
+            Update();
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            manager.MainFrame.Navigate(new AddEditPage((sender as Button).DataContext as Agent));
+            Update();
+        }
+        private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Борисин_глазки_saveEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+            AgentListView.ItemsSource = Борисин_глазки_saveEntities.GetContext().Agent.ToList();
+            Update();
         }
     }
 }
