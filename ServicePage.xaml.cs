@@ -211,6 +211,11 @@ for(int i= currentPage * 10;i < min; i++)
             {
                 editprior.Visibility = Visibility.Visible;
             }
+            else
+            {
+                editprior.Visibility = Visibility.Hidden;
+            }
+            Update();
         }
 
 

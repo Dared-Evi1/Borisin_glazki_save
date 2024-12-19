@@ -232,16 +232,18 @@ namespace Borisin_glazki_save
             {
                 try
                 {
-                    foreach (ProductSale history in Realze.Items)
+                    if (Realze.SelectedItem != null) // Проверка на наличие выбранного элемента
                     {
-                        Борисин_глазки_saveEntities.GetContext().ProductSale.Remove(history);
-
+                        ProductSale selectedHistory = (ProductSale)Realze.SelectedItem; // Получаем выбранный объект
+                        Борисин_глазки_saveEntities.GetContext().ProductSale.Remove(selectedHistory);
+                        Борисин_глазки_saveEntities.GetContext().SaveChanges();
+                        MessageBox.Show("Информация удалена!");
+                        manager.MainFrame.GoBack();
                     }
-                    Борисин_глазки_saveEntities.GetContext().SaveChanges();
-
-                    MessageBox.Show("Информация удалена!");
-                    manager.MainFrame.GoBack();
-
+                    else
+                    {
+                        MessageBox.Show("Пожалуйста, выберите запись для удаления.");
+                    }
                 }
                 catch (Exception ex)
                 {

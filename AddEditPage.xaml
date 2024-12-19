@@ -90,8 +90,8 @@
 
         <StackPanel Grid.Column="2" Margin="5">
             <ComboBox Name="Realze" DisplayMemberPath="Datacount" SelectedValuePath="AgentID"    ></ComboBox>
-            <Button Name="add" Click="add_Click" Content="доб реал"></Button>
-            <Button Name="delete" Click="delete_Click_1" Content="уд реал"></Button>
+            <Button Name="add" Click="add_Click" Content="добавить реализацию"></Button>
+            <Button Name="delete" Click="delete_Click_1" Content="удалить реализацию"></Button>
             <TextBox Name="searchprod" TextChanged="searchprod_TextChanged"></TextBox>
             <ComboBox Name="Products" DisplayMemberPath="Title" SelectedValuePath="ID" ></ComboBox>
             <TextBox Name="ProductCountTB"></TextBox>

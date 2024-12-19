@@ -50,10 +50,10 @@
 
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
                         <Image Width=" 100"  Grid.Column=" 0" Grid.RowSpan="4" Stretch="UniformToFill" HorizontalAlignment="Center" >
@@ -72,9 +72,12 @@
                             <TextBlock Text=" | "  FontSize="20" ></TextBlock>
                             <TextBlock Text="{Binding Title}" FontSize="20" ></TextBlock>
                         </WrapPanel>
-                            <TextBlock Text="{Binding discount, StringFormat=*скидка {0} %}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"  FontSize=" 16"  ></TextBlock>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="{Binding discount, StringFormat=*скидка {0} %}"  HorizontalAlignment="Right"  FontSize=" 20"  ></TextBlock>
+                            <Button Content="Редактировать" Name="Edit" Click="Edit_Click" HorizontalAlignment="Right" Grid.Row="2"></Button>
 
-                        <Button Content="Редактировать" Name="Edit" Click="Edit_Click" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"></Button>
+                        </StackPanel>
+
                         <WrapPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"  >
                             <TextBlock Text="продажи за год:" FontSize="16" ></TextBlock>
                             <TextBlock Text="{Binding Prod}" FontSize="16"></TextBlock>

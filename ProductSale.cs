@@ -24,9 +24,10 @@ namespace Borisin_glazki_save
         {
             get
             {
+                string product = Product.Title;
                 string data = Convert.ToString(SaleDate);
                 string count = Convert.ToString(ProductCount);
-                string dc = data + " " + count;
+                string dc =product +" " + data + " " + count;
                 return dc;
             }
         }
