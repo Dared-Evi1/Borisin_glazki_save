@@ -15,19 +15,19 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" >
-            <TextBox TextChanged="Search_TextChanged"  Name="Search" Width="200"  FontSize="20"></TextBox>
-            <ComboBox Name="sort" SelectionChanged="sort_SelectionChanged" Width="200" FontSize="15">
+        <WrapPanel Orientation="Horizontal"  Grid.Row="0" HorizontalAlignment="Center" >
+            <TextBox TextChanged="Search_TextChanged"  Name="Search" Width="200"  FontSize="20" Margin="5"></TextBox>
+            <ComboBox Name="sort" SelectionChanged="sort_SelectionChanged" Width="200" FontSize="15" Margin="5">
                 <TextBlock>Сортировка</TextBlock>
                 <TextBlock>Наименование по возрастанию</TextBlock>
                 <TextBlock>Наименование по убыванию</TextBlock>
                 <TextBlock>Скидка по возрастанию</TextBlock>
                 <TextBlock>Скидка по убыванию</TextBlock>
                 <TextBlock>Приоритет по возрастанию</TextBlock>
-                <TextBlock>Скидка по убыванию</TextBlock>
+                <TextBlock>Приоритет по убыванию</TextBlock>
 
             </ComboBox>
-            <ComboBox Name="filtr" SelectionChanged="filtr_SelectionChanged" Width="200" FontSize="15">
+            <ComboBox Name="filtr" SelectionChanged="filtr_SelectionChanged" Width="200" FontSize="15" Margin="5">
                 <TextBlock > все</TextBlock>
                 <TextBlock > МФО</TextBlock>
                 <TextBlock > ООО</TextBlock>
@@ -37,16 +37,17 @@
                 <TextBlock > ПАО</TextBlock>
 
             </ComboBox>
-            <Button Name="Add" Click="Add_Click" Content="Добавить"></Button>
         </WrapPanel>
 
-        <ListView Name="AgentListView" Grid.Row="2" >
+        <ListView Name="AgentListView" Grid.Row="2" SelectionChanged="AgentListView_SelectionChanged" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Background="{Binding FonStyle}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="500"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -71,19 +72,28 @@
                             <TextBlock Text=" | "  FontSize="20" ></TextBlock>
                             <TextBlock Text="{Binding Title}" FontSize="20" ></TextBlock>
                         </WrapPanel>
-                        
-                        <TextBlock Text="продажи за год:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" FontSize="16" TextWrapping="Wrap"></TextBlock>
+                            <TextBlock Text="{Binding discount, StringFormat=*скидка {0} %}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right"  FontSize=" 16"  ></TextBlock>
+
+                        <Button Content="Редактировать" Name="Edit" Click="Edit_Click" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"></Button>
+                        <WrapPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"  >
+                            <TextBlock Text="продажи за год:" FontSize="16" ></TextBlock>
+                            <TextBlock Text="{Binding Prod}" FontSize="16"></TextBlock>
+                        </WrapPanel>
 
                         <TextBlock Text="{Binding Phone}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" FontSize="16" TextWrapping="Wrap"></TextBlock>
                         <WrapPanel Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" >
                             <TextBlock Text="Приоритетность: "  FontSize="16" ></TextBlock>
                             <TextBlock  Text="{Binding Priority}"  FontSize="16" ></TextBlock>
-                            <Button Content="Редактировать" Name="Edit" Click="Edit_Click"></Button>
                         </WrapPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <WrapPanel Grid.Row="3" HorizontalAlignment="Left"  >
+            <Button Name="Add" Click="Add_Click" Content="Добавить" Width="100" FontSize="20"></Button>
+            <Button Content="Редактировать приоритетность" Name="editprior" Click="editprior_Click" Width="200" FontSize="20" Visibility="Hidden" ></Button>
+
+        </WrapPanel>
         <StackPanel Grid.Row="3" Orientation ="Horizontal" HorizontalAlignment="Right" >
             <TextBlock Name="Count" FontSize="20" Height="25"></TextBlock>
             <TextBlock Name="Allrecords" FontSize="20" Height="25"></TextBlock>
@@ -95,7 +105,7 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
-            <Button Name="Right" Content="&gt;" Width="25" Height="25" Click="Right_Click"></Button>
+            <Button Name="Right" Content="&gt;" Width="25" Height="25" Click="Right_Click" ></Button>
         </StackPanel>
     </Grid>
 </Page>

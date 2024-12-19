@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Borisin_glazki_save"
         mc:Ignorable="d"
-        Title="Борисин" Height="450" Width="800" FontFamily="Century Gothic" Icon=" agents/Глазки-save.ico">
+        Title="Борисин" Height="700" Width="900" FontFamily="Century Gothic" Icon=" agents/Глазки-save.ico">
     <Grid>
         
         <Grid.RowDefinitions>

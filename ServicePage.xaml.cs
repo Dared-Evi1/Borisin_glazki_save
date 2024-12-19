@@ -20,6 +20,7 @@ namespace Borisin_glazki_save
     /// </summary>
     public partial class ServicePage : Page
     {
+        //Opacity="{Binding DiscountInt}
         int countRecords;
         int countPage;
         int currentPage = 0;
@@ -57,20 +58,20 @@ namespace Borisin_glazki_save
                           || p.Email.ToLower().Contains(Search.Text.ToLower())
                           || p.Phone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Contains(Search.Text.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", ""))).ToList();
 
-            AgentListView.ItemsSource = currentAgents.ToList();
+            currentAgents = currentAgents.ToList();
             
             if (sort.SelectedIndex == 1)
-                AgentListView.ItemsSource = currentAgents.OrderBy(p => p.Title).ToList();
+                currentAgents = currentAgents.OrderBy(p => p.Title).ToList();
             if (sort.SelectedIndex == 2)
-                AgentListView.ItemsSource = currentAgents.OrderByDescending(p => p.Title).ToList();
+                currentAgents = currentAgents.OrderByDescending(p => p.Title).ToList();
             if (sort.SelectedIndex == 3)
-                AgentListView.ItemsSource = currentAgents.OrderBy(p => p.Title).ToList();
+                currentAgents = currentAgents.OrderBy(p => p.discount).ToList();
             if (sort.SelectedIndex == 4)
-                AgentListView.ItemsSource = currentAgents.OrderByDescending(p => p.Title).ToList();
+                currentAgents = currentAgents.OrderByDescending(p => p.discount).ToList();
             if (sort.SelectedIndex == 5)
-                AgentListView.ItemsSource = currentAgents.OrderBy(p => p.Priority).ToList();
+                currentAgents = currentAgents.OrderBy(p => p.Priority).ToList();
             if (sort.SelectedIndex == 6)
-                AgentListView.ItemsSource = currentAgents.OrderByDescending(p => p.Priority).ToList();
+                currentAgents = currentAgents.OrderByDescending(p => p.Priority).ToList();
             AgentListView.ItemsSource = currentAgents;
             TableList = currentAgents;
             Change(0, 0);
@@ -201,6 +202,48 @@ for(int i= currentPage * 10;i < min; i++)
         {
             Борисин_глазки_saveEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
             AgentListView.ItemsSource = Борисин_глазки_saveEntities.GetContext().Agent.ToList();
+            Update();
+        }
+
+        private void AgentListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AgentListView.SelectedItems.Count > 1)
+            {
+                editprior.Visibility = Visibility.Visible;
+            }
+        }
+
+
+        private void editprior_Click(object sender, RoutedEventArgs e)
+        {
+            int maxPriority = 0;
+            foreach (Agent agent in AgentListView.SelectedItems)
+            {
+                if (agent.Priority > maxPriority)
+                {
+                    maxPriority = agent.Priority;
+                }
+            }
+            SetWindow setPrioty = new SetWindow(maxPriority);
+            setPrioty.ShowDialog();
+            if (setPrioty.prior.Text.Length == 0)
+            {
+                MessageBox.Show("Изменений не произошло");
+                return;
+            }
+            int num = Convert.ToInt32(setPrioty.prior.Text);
+            if (num < 0)
+                MessageBox.Show("Приотритет не может быть отрицательным");
+            else
+            {
+                foreach (Agent agent in AgentListView.SelectedItems)
+                {
+                    agent.Priority = num;
+                }
+
+                Борисин_глазки_saveEntities.GetContext().SaveChanges();
+
+            }
             Update();
         }
     }

@@ -19,7 +19,29 @@ namespace Borisin_glazki_save
         public int AgentID { get; set; }
         public System.DateTime SaleDate { get; set; }
         public int ProductCount { get; set; }
-    
+
+        public string Datacount
+        {
+            get
+            {
+                string data = Convert.ToString(SaleDate);
+                string count = Convert.ToString(ProductCount);
+                string dc = data + " " + count;
+                return dc;
+            }
+        }
+
+
+
+  public decimal Cost
+        {
+            get
+            {
+                return Product.MinCostForAgent * this.ProductCount;
+            }
+        }
+
+
         public virtual Agent Agent { get; set; }
         public virtual Product Product { get; set; }
     }

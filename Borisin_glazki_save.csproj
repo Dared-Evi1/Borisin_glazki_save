@@ -73,6 +73,7 @@
     <Compile Include="AgentPriorityHistory.cs">
       <DependentUpon>Model1Borisin.tt</DependentUpon>
     </Compile>
+    <Compile Include="AgentProductsViewModel.cs" />
     <Compile Include="AgentType.cs">
       <DependentUpon>Model1Borisin.tt</DependentUpon>
     </Compile>
@@ -118,6 +119,9 @@
     <Compile Include="ServicePage.xaml.cs">
       <DependentUpon>ServicePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SetWindow.xaml.cs">
+      <DependentUpon>SetWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Shop.cs">
       <DependentUpon>Model1Borisin.tt</DependentUpon>
     </Compile>
@@ -144,6 +148,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ServicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
